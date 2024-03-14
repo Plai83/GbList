@@ -57,7 +57,7 @@ public class GbArrayList<E> implements GbList<E> {
     public void remove(E value) {
         for (int i = 0; i < values.length; i++) {
             if (values[i].equals(value)) {
-                remove(i);
+                removeByIndex(i);
                 return;
             }
         }
@@ -65,13 +65,19 @@ public class GbArrayList<E> implements GbList<E> {
     }
 
     @Override
-    public void remove(int index) {
-        capacity = capacity - 1;
+    public void removeByIndex(int index) {
+//        capacity = capacity - 1;
         try{
-            E[] set = (E[]) new Object[capacity];
-            System.arraycopy(values, 0, set, 0, index);
-            int amountElementAfterIndex = values.length - index - 1;
-            System.arraycopy(values, index + 1, set, index, amountElementAfterIndex);
+//            E[] res = (E[]) new Object[capacity];
+//            System.arraycopy(values, 0, res, 0, index);
+//            int amountElementAfterIndex = values.length - index - 1;
+//            System.arraycopy(values, index + 1, res, index, amountElementAfterIndex);
+//            size--;
+            E[] temp = values;
+            values = (E[]) new Object[temp.length - 1];
+            System.arraycopy(temp, 0, values, 0, index);
+            int amountElementAfterIndex = temp.length - index - 1;
+            System.arraycopy(temp, index + 1, values, index, amountElementAfterIndex);
         }
         catch (ClassCastException e) {
             System.out.println(e.getMessage());
@@ -86,5 +92,21 @@ public class GbArrayList<E> implements GbList<E> {
     @Override
     public Iterator<E> iterator() {
         return new ArrayIterator<>(values);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("[");
+        int i = 0;
+        while (values[i] != null) {
+            builder.append(values[i]).append(", ");
+            i++;
+        }
+        if (builder.length() == 1) {
+            return "[]";
+        }
+        builder.deleteCharAt(builder.length() - 1).deleteCharAt(builder.length() - 1);
+        builder.append("]");
+        return builder.toString();
     }
 }

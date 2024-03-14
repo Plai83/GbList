@@ -27,7 +27,7 @@ public class GbLinkedList<E> implements GbList<E> {
     }
 
     @Override
-    public void remove(int index) {
+    public void removeByIndex(int index) {
 
     }
 
