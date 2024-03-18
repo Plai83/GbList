@@ -2,9 +2,6 @@ import gb_collections.GbList;
 import gb_collections.lists.GbArrayList;
 import gb_collections.lists.GbLinkedList;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
 
